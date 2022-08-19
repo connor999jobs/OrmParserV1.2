@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.strategy.FileReadWriteSource;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -19,9 +20,9 @@ public class XmlWriteStrategy implements WriteStrategy{
     @Override
     @SneakyThrows
     public void write(List<?> objectsList) {
+        File file = source.getSource();
         XmlMapper mapper = new XmlMapper();
         mapper.registerModule(new JSR310Module());
-        String xmlValue = mapper.writeValueAsString(objectsList);
-        Files.write(Path.of(source.getContent()), xmlValue.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+        mapper.writeValue(file, objectsList);
     }
 }

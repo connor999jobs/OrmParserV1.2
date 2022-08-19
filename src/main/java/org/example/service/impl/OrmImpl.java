@@ -58,7 +58,7 @@ public class OrmImpl implements Orm {
     private static Object transformValueToFieldType(Field field, String value) {
         Map<Class<?>, Function<String, Object>> typeToFunction = new LinkedHashMap<>();
         typeToFunction.put(String.class, s -> s);
-        typeToFunction.put(int.class, Integer::parseInt);
+        typeToFunction.put(Integer.class, Integer::parseInt);
         typeToFunction.put(Float.class, Float::parseFloat);
         typeToFunction.put(LocalDate.class, LocalDate::parse);
         typeToFunction.put(LocalDateTime.class, LocalDate::parse);

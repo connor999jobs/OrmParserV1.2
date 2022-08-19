@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigInteger;
 import java.time.LocalDate;
 
 
@@ -16,9 +15,12 @@ import java.time.LocalDate;
 public class Person {
     private String name;
     private Integer age;
-    private Integer salary;
+    private Float salary;
     private String position;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
+
+
+
 
 
 }

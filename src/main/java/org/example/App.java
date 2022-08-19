@@ -12,6 +12,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,14 +28,16 @@ public class App {
 
     public static void main( String[] args ) throws URISyntaxException {
 
-        List<Person> result = new ArrayList<>();
+        List<Person> result;
 //        DataReadWriteSource<ResultSet> rw = new ConnectionReadWriteSource(connect.getConnection());
 //        result = ORM.readAll(rw,Person.class);
 
 
-        URL url = App.class.getClassLoader().getResource("reader.json");
+        URL url = App.class.getClassLoader().getResource("reader.xml");
         DataReadWriteSource<?> readWriteSource = new FileReadWriteSource(new File(url.toURI()));
-        result.add(new Person("V",22,2222,"Marketing","27-09-1998"));
+        result = ORM.readAll(readWriteSource, Person.class);
+        LocalDate date = LocalDate.of(1914, 7, 28);
+        result.add(new Person("Va",20,200f,"pp", date));
         ORM.writeAll(readWriteSource, result);
 
     }

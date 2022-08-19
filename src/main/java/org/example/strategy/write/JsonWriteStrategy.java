@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.strategy.FileReadWriteSource;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -20,9 +21,9 @@ public class JsonWriteStrategy implements WriteStrategy{
     @Override
     @SneakyThrows
     public void write(List<?> objects) {
+        File file = source.getSource();
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JSR310Module());
-        String json = mapper.writeValueAsString(objects);
-        Files.write(Path.of(source.getContent()), json.getBytes(), StandardOpenOption.TRUNCATE_EXISTING);
+        mapper.writeValue(file, objects);
     }
 }
