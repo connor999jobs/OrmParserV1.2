@@ -5,4 +5,4 @@ Orm v1.2
 - Перепечатываем код (руками) / не копируем - done;
 - Работаем с базой данных (Sqlite) - done(using Postgres);
 - Пробуем реализовать аннотацию над классом @Person > @Table для оптимизации new ConnectionReadWriteSource(connection, "person") - done;
-- Пробуем реализовать метод write - in process;
+- Пробуем реализовать метод write - in process(Json - done, Xml - done, CsV - done, Database - ???);
