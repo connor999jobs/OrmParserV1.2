@@ -15,12 +15,7 @@ import java.time.LocalDate;
 public class Person {
     private String name;
     private Integer age;
-    private Float salary;
+    private Double salary;
     private String position;
     private LocalDate dateOfBirth;
-
-
-
-
-
 }

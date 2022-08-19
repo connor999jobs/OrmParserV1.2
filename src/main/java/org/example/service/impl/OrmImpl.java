@@ -64,6 +64,7 @@ public class OrmImpl implements Orm {
         typeToFunction.put(LocalDateTime.class, LocalDate::parse);
         typeToFunction.put(Long.class, Long::parseLong);
         typeToFunction.put(BigInteger.class, BigInteger::new);
+        typeToFunction.put(Double.class, Double::new);
 
         return typeToFunction.getOrDefault(field.getType(), type -> {
             throw new UnsupportedOperationException("Type isn't supported by parser " + type);
@@ -119,7 +120,7 @@ public class OrmImpl implements Orm {
         }else if(ext.equals("xml")){
             return new XmlWriteStrategy((FileReadWriteSource) content);
         }else {
-            return new CsvWriteStrategy();
+            return new CsvWriteStrategy((FileReadWriteSource) content);
         }
     }
 }
