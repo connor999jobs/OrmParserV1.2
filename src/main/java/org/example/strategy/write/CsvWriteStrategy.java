@@ -22,7 +22,7 @@ public class CsvWriteStrategy implements WriteStrategy{
 
     @Override
     @SneakyThrows
-    public void write(List<?> objects) {
+    public <T> void write(List<T> objects) {
         File file = source.getSource();
         CSVWriter writer = new CSVWriter(new FileWriter(file));
         String[] names = getNamesFromEntity(objects);

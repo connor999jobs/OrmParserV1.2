@@ -19,7 +19,7 @@ public class XmlWriteStrategy implements WriteStrategy{
 
     @Override
     @SneakyThrows
-    public void write(List<?> objectsList) {
+    public <T> void write(List<T> objectsList) {
         File file = source.getSource();
         XmlMapper mapper = new XmlMapper();
         mapper.registerModule(new JSR310Module());

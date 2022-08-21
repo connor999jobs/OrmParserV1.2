@@ -20,7 +20,7 @@ public class JsonWriteStrategy implements WriteStrategy{
 
     @Override
     @SneakyThrows
-    public void write(List<?> objects) {
+    public <T> void write(List<T> objects) {
         File file = source.getSource();
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JSR310Module());

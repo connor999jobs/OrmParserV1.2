@@ -2,19 +2,19 @@ package org.example.service.impl;
 
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
+import org.example.model.Person;
 import org.example.model.Table;
 import org.example.service.Orm;
 import org.example.strategy.ConnectionReadWriteSource;
 import org.example.strategy.DataReadWriteSource;
 import org.example.strategy.FileReadWriteSource;
 import org.example.strategy.read.*;
-import org.example.strategy.write.CsvWriteStrategy;
-import org.example.strategy.write.JsonWriteStrategy;
-import org.example.strategy.write.WriteStrategy;
-import org.example.strategy.write.XmlWriteStrategy;
+import org.example.strategy.write.*;
+import org.example.utils.ConnectionToDatabase;
 
 import java.lang.reflect.Field;
 import java.math.BigInteger;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -106,8 +106,21 @@ public class OrmImpl implements Orm {
             WriteStrategy strategy = writeStrategy(content);
             writeValueToSource(strategy,object);
         }
+        else if (content instanceof ConnectionReadWriteSource){
+            WriteStrategy strategyDatabase = writeStrategyDatabase(content);
+            writeValueToDatabase(strategyDatabase,object);
+        }
 
     }
+
+    private <T> void writeValueToDatabase(WriteStrategy strategyDatabase, List<T> object) {
+        strategyDatabase.write(object);
+    }
+
+    private WriteStrategy writeStrategyDatabase(DataReadWriteSource<?> content) {
+        return new DatabaseWriteStrategy();
+    }
+
 
     private <T> void writeValueToSource(WriteStrategy strategy, List<T> object) {
         strategy.write(object);
@@ -119,8 +132,11 @@ public class OrmImpl implements Orm {
             return new JsonWriteStrategy((FileReadWriteSource) content);
         }else if(ext.equals("xml")){
             return new XmlWriteStrategy((FileReadWriteSource) content);
-        }else {
+        }else if (ext.equals("csv")){
             return new CsvWriteStrategy((FileReadWriteSource) content);
+        }
+        else {
+            throw new UnsupportedOperationException("Wrong type file " + content);
         }
     }
 }

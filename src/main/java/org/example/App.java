@@ -30,6 +30,9 @@ public class App {
         List<Person> result;
         DataReadWriteSource<ResultSet> rw = new ConnectionReadWriteSource(connect.getConnection());
         result = ORM.readAll(rw,Person.class);
+        LocalDate date = LocalDate.of(1914, 7, 28);
+        result.add(new Person("Va",20,200.0,"pp",date));
+        ORM.writeAll(rw, result);
 
 
 //        URL url = App.class.getClassLoader().getResource("reader.csv");

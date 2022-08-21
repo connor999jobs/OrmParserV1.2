@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b394dfc-bdc3-4fc3-b093-abde27bf52de" name="Changes" comment="Xml and Json write - done">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="9b394dfc-bdc3-4fc3-b093-abde27bf52de" name="Changes" comment="Csv writer + some datebase fix(only left localdate, bacause date = null);">
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/impl/OrmImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/impl/OrmImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/DatabaseParsingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/DatabaseParsingStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/CsvWriteStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/CsvWriteStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/reader.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/reader.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/DatabaseWriteStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/DatabaseWriteStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/JsonWriteStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/JsonWriteStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/WriteStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/WriteStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/XmlWriteStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/XmlWriteStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/script.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/script.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +27,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -51,6 +56,9 @@
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "postgresql"
+    ],
+    "RunConfigurationTargetLRU": [
+      "25f164bb-0976-4377-bfd7-e914ba4f8d62"
     ]
   }
 }]]></component>
@@ -59,7 +67,7 @@
       <recent name="C:\Users\konno\Downloads\JavaTests-OrmBranch\OrmParserV1.2\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.App" />
       <module name="OrmParserV1.2" />
@@ -73,9 +81,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="script.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/target/classes/script.sql" />
+      <script-mode>FILE</script-mode>
+      <data-source id="25f164bb-0976-4377-bfd7-e914ba4f8d62" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.App" />
+        <item itemvalue="Database Script.script.sql" />
       </list>
     </recent_temporary>
   </component>
@@ -89,7 +104,9 @@
       <updated>1660921075164</updated>
       <workItem from="1660921077638" duration="3684000" />
       <workItem from="1660928732899" duration="4515000" />
-      <workItem from="1660934582315" duration="2933000" />
+      <workItem from="1660934582315" duration="3187000" />
+      <workItem from="1660944631152" duration="1411000" />
+      <workItem from="1661078397328" duration="6528000" />
     </task>
     <task id="LOCAL-00001" summary="Some Xml and Json">
       <created>1660924723266</created>
@@ -105,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1660933525455</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Csv writer + some datebase fix(only left localdate, bacause date = null);">
+      <created>1660937770143</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1660937770143</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,17 +149,24 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Some Xml and Json" />
     <MESSAGE value="Xml and Json write - done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Xml and Json write - done" />
+    <MESSAGE value="Csv writer + some datebase fix(only left localdate, bacause date = null);" />
+    <option name="LAST_COMMIT_MESSAGE" value="Csv writer + some datebase fix(only left localdate, bacause date = null);" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/App.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="6" />
+          <line>34</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.example.model.Person" memberName="dateOfBirth" />
+        <PinnedItemInfo parentTag="org.example.model.Person" memberName="position" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

@@ -1,5 +1,6 @@
 package org.example.strategy.read;
 
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.example.model.Table;
 import org.example.model.TableName;
@@ -11,12 +12,12 @@ import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+
+@RequiredArgsConstructor
 public class DatabaseParsingStrategy implements ParsingStrategy<ConnectionReadWriteSource> {
     private final Class<?> tableClass;
 
-    public DatabaseParsingStrategy(Class<?> clazz) {
-        this.tableClass = clazz;
-    }
+
 
     @SneakyThrows
     @Override
