@@ -3,6 +3,7 @@ package org.example.strategy.write;
 import com.opencsv.CSVWriter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.example.strategy.ConnectionReadWriteSource;
 import org.example.strategy.FileReadWriteSource;
 
 import java.io.File;
@@ -15,7 +16,7 @@ import java.util.stream.IntStream;
 
 
 @RequiredArgsConstructor
-public class CsvWriteStrategy implements WriteStrategy{
+public class CsvWriteStrategy implements WriteStrategy<ConnectionReadWriteSource>{
 
     private final FileReadWriteSource source;
 

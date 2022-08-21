@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.example.strategy.ConnectionReadWriteSource;
 import org.example.strategy.FileReadWriteSource;
 
 import java.io.File;
@@ -14,7 +15,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class JsonWriteStrategy implements WriteStrategy{
+public class JsonWriteStrategy implements WriteStrategy<ConnectionReadWriteSource>{
 
     private final FileReadWriteSource source;
 

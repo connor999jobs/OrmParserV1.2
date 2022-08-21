@@ -19,3 +19,4 @@
 -- VALUES('Valik', 23, 5000.0, 'senior java developer', '1999-02-06');
 
 select * from person;
+

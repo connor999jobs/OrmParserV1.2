@@ -4,6 +4,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.example.strategy.ConnectionReadWriteSource;
 import org.example.strategy.FileReadWriteSource;
 
 import java.io.File;
@@ -13,7 +14,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 @RequiredArgsConstructor
-public class XmlWriteStrategy implements WriteStrategy{
+public class XmlWriteStrategy implements WriteStrategy<ConnectionReadWriteSource>{
 
     public final FileReadWriteSource source;
 
