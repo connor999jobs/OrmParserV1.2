@@ -1,9 +1,8 @@
 package org.example.strategy.write;
 
 import com.opencsv.CSVWriter;
-import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.example.strategy.ConnectionReadWriteSource;
+import org.example.strategy.DataReadWriteSource;
 import org.example.strategy.FileReadWriteSource;
 
 import java.io.File;
@@ -14,20 +13,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
-
-@RequiredArgsConstructor
-public class CsvWriteStrategy implements WriteStrategy<ConnectionReadWriteSource>{
-
-    private final FileReadWriteSource source;
+public class CsvWrite implements WriteStrategy<FileReadWriteSource> {
 
 
     @Override
     @SneakyThrows
-    public <T> void write(List<T> objects) {
+    public void write(FileReadWriteSource source, List<?> list) {
         File file = source.getSource();
         CSVWriter writer = new CSVWriter(new FileWriter(file));
-        String[] names = getNamesFromEntity(objects);
-        writer.writeAll(convertEntitiesToList(names, objects));
+        String[] names = getNamesFromEntity(list);
+        writer.writeAll(convertEntitiesToList(names, list));
         writer.flush();
         writer.close();
     }

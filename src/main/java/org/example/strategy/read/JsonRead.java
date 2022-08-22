@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class JSONParsingStrategy implements ParsingStrategy<FileReadWriteSource> {
+public class JsonRead implements ParsingStrategy<FileReadWriteSource> {
 
     @SneakyThrows
     @Override

@@ -9,5 +9,6 @@ public interface Orm {
     @SneakyThrows
     <T> List<T> readAll(DataReadWriteSource<?> source, Class<T> cls);
 
+    @SneakyThrows
     <T> void writeAll(DataReadWriteSource<?> content, List<T> object);
 }

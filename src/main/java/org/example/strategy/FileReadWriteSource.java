@@ -10,9 +10,9 @@ import java.nio.charset.StandardCharsets;
 
 @RequiredArgsConstructor
 @Getter
-public class FileReadWriteSource implements DataReadWriteSource<String> {
-    private final File source;
+public class FileReadWriteSource implements DataReadWriteSource{
 
+    private final File source;
 
     @Override
     @SneakyThrows

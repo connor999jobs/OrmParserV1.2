@@ -2,7 +2,6 @@ package org.example.service.impl;
 
 import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
-import org.example.model.Person;
 import org.example.model.Table;
 import org.example.service.Orm;
 import org.example.strategy.ConnectionReadWriteSource;
@@ -10,11 +9,9 @@ import org.example.strategy.DataReadWriteSource;
 import org.example.strategy.FileReadWriteSource;
 import org.example.strategy.read.*;
 import org.example.strategy.write.*;
-import org.example.utils.ConnectionToDatabase;
 
 import java.lang.reflect.Field;
 import java.math.BigInteger;
-import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,9 +23,8 @@ import java.util.function.Function;
 public class OrmImpl implements Orm {
 
     @Override
-    @SneakyThrows
-    public <T> List<T> readAll(DataReadWriteSource<?> inputSource, Class<T> cls) {
-        Table table = convertToTable(inputSource, cls);
+    public <T> List<T> readAll(DataReadWriteSource<?> source, Class<T> cls) {
+        Table table = convertToTable(source);
         return convertTableToListOfClasses(table, cls);
     }
 
@@ -55,7 +51,7 @@ public class OrmImpl implements Orm {
         return instance;
     }
 
-    private static Object transformValueToFieldType(Field field, String value) {
+    private Object transformValueToFieldType(Field each, String value) {
         Map<Class<?>, Function<String, Object>> typeToFunction = new LinkedHashMap<>();
         typeToFunction.put(String.class, s -> s);
         typeToFunction.put(Integer.class, Integer::parseInt);
@@ -66,77 +62,62 @@ public class OrmImpl implements Orm {
         typeToFunction.put(BigInteger.class, BigInteger::new);
         typeToFunction.put(Double.class, Double::new);
 
-        return typeToFunction.getOrDefault(field.getType(), type -> {
+        return typeToFunction.getOrDefault(each.getType(), type -> {
             throw new UnsupportedOperationException("Type isn't supported by parser " + type);
         }).apply(value);
     }
 
-    private Table convertToTable(DataReadWriteSource dataInputSource, Class<?> cls) {
-        if (dataInputSource instanceof ConnectionReadWriteSource) {
-            ConnectionReadWriteSource databaseSource = (ConnectionReadWriteSource) dataInputSource;
-
-            return new DatabaseParsingStrategy(cls).parseToTable(databaseSource);
-        } else if (dataInputSource instanceof FileReadWriteSource) {
-            FileReadWriteSource fileSource = (FileReadWriteSource) dataInputSource;
+    private <T> Table convertToTable(DataReadWriteSource<?> source) {
+        if (source instanceof ConnectionReadWriteSource) {
+            ConnectionReadWriteSource databaseSource = (ConnectionReadWriteSource) source;
+            return new DatabaseRead().parseToTable(databaseSource);
+        } else if (source instanceof FileReadWriteSource) {
+            FileReadWriteSource fileSource = (FileReadWriteSource) source;
             return getStringParsingStrategy(fileSource).parseToTable(fileSource);
         } else {
-            throw new UnsupportedOperationException("Unknown DataInputSource " + dataInputSource);
+            throw new UnsupportedOperationException("Unknown DataInputSource - " + source);
         }
     }
 
-    private ParsingStrategy<FileReadWriteSource> getStringParsingStrategy(FileReadWriteSource inputSource) {
-        String content = inputSource.getContent();
+    private ParsingStrategy<FileReadWriteSource> getStringParsingStrategy(FileReadWriteSource fileSource) {
+        String content = fileSource.getContent();
         char firstChar = content.charAt(0);
 
         switch (firstChar) {
             case '{':
             case '[':
-                return new JSONParsingStrategy();
+                return new JsonRead();
             case '<':
-                return new XMLParsingStrategy();
+                return new XmlRead();
             default:
-                return new CSVParsingStrategy();
+                return new CsvRead();
         }
     }
-
 
     @Override
     public <T> void writeAll(DataReadWriteSource<?> content, List<T> object) {
-        if (content instanceof FileReadWriteSource){
-            WriteStrategy strategy = writeStrategy(content);
-            writeValueToSource(strategy,object);
+        if (content instanceof ConnectionReadWriteSource) {
+            new DatabaseWrite().write((ConnectionReadWriteSource) content, object);
+        } else if (content instanceof FileReadWriteSource) {
+            getWritingStrategy((FileReadWriteSource) object)
+                    .write((FileReadWriteSource) content, object);
+        } else {
+            throw new UnsupportedOperationException("Unknown data input source");
         }
-        else if (content instanceof ConnectionReadWriteSource){
-            WriteStrategy strategyDatabase = writeStrategyDatabase(content);
-            writeValueToDatabase(strategyDatabase,object);
-        }
 
     }
 
-    private <T> void writeValueToDatabase(WriteStrategy strategyDatabase, List<T> object) {
-        strategyDatabase.write(object);
-    }
-
-    private WriteStrategy writeStrategyDatabase(DataReadWriteSource<?> content) {
-        return new DatabaseWriteStrategy();
-    }
-
-
-    private <T> void writeValueToSource(WriteStrategy strategy, List<T> object) {
-        strategy.write(object);
-    }
-
-    private WriteStrategy writeStrategy(DataReadWriteSource<?> content) {
-        String ext = FilenameUtils.getExtension(((FileReadWriteSource) content).getSource().getName());
-        if (ext.equals("json")) {
-            return new JsonWriteStrategy((FileReadWriteSource) content);
-        }else if(ext.equals("xml")){
-            return new XmlWriteStrategy((FileReadWriteSource) content);
-        }else if (ext.equals("csv")){
-            return new CsvWriteStrategy((FileReadWriteSource) content);
-        }
-        else {
-            throw new UnsupportedOperationException("Wrong type file " + content);
+    private WriteStrategy<FileReadWriteSource> getWritingStrategy(FileReadWriteSource object) {
+        String content = FilenameUtils.getExtension(object.getSource().getName());
+        switch (content) {
+            case "json":
+                new JsonWrite();
+            case "xml":
+                new XmlWrite();
+            case "csv":
+                new CsvWrite();
+            default:
+                throw new UnsupportedOperationException();
         }
     }
 }

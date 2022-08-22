@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class ConnectionToDatabase {
+public class ConnectionToDB {
     private static final String url = "jdbc:postgresql://localhost:5432/OrmSystem";
     private static final String username = "postgres";
     private static final String password = "Vadym280576";

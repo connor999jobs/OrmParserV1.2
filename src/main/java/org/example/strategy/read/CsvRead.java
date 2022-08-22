@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class CSVParsingStrategy implements ParsingStrategy<FileReadWriteSource> {
+public class CsvRead implements ParsingStrategy<FileReadWriteSource>{
 
     public static final String DELIMITER = ",";
     public static final String COMMENT = "--";
