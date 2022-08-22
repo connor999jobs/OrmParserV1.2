@@ -2,7 +2,6 @@ package org.example.strategy.write;
 
 import com.opencsv.CSVWriter;
 import lombok.SneakyThrows;
-import org.example.strategy.DataReadWriteSource;
 import org.example.strategy.FileReadWriteSource;
 
 import java.io.File;

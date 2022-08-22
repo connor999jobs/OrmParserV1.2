@@ -28,6 +28,19 @@ public class OrmImpl implements Orm {
         return convertTableToListOfClasses(table, cls);
     }
 
+    private <T> Table convertToTable(DataReadWriteSource<T> dataReadWriteSource) {
+        if (dataReadWriteSource instanceof ConnectionReadWriteSource){
+            ConnectionReadWriteSource readWriteSource = (ConnectionReadWriteSource) dataReadWriteSource;
+            return new DatabaseRead().parseToTable(readWriteSource);
+        } else if (dataReadWriteSource instanceof FileReadWriteSource){
+            return getStringParsingStrategy((FileReadWriteSource) dataReadWriteSource)
+                    .parseToTable((FileReadWriteSource) dataReadWriteSource);
+        } else
+        {
+            throw new UnsupportedOperationException("Unknown type " + dataReadWriteSource);
+        }
+    }
+
     private <T> List<T> convertTableToListOfClasses(Table table, Class<T> cls) {
         List<T> result = new ArrayList<>();
         for (int index = 0; index < table.size(); index++) {
@@ -67,20 +80,10 @@ public class OrmImpl implements Orm {
         }).apply(value);
     }
 
-    private <T> Table convertToTable(DataReadWriteSource<?> source) {
-        if (source instanceof ConnectionReadWriteSource) {
-            ConnectionReadWriteSource databaseSource = (ConnectionReadWriteSource) source;
-            return new DatabaseRead().parseToTable(databaseSource);
-        } else if (source instanceof FileReadWriteSource) {
-            FileReadWriteSource fileSource = (FileReadWriteSource) source;
-            return getStringParsingStrategy(fileSource).parseToTable(fileSource);
-        } else {
-            throw new UnsupportedOperationException("Unknown DataInputSource - " + source);
-        }
-    }
+
 
     private ParsingStrategy<FileReadWriteSource> getStringParsingStrategy(FileReadWriteSource fileSource) {
-        String content = fileSource.getContent();
+        String content = String.valueOf(fileSource.getContent());
         char firstChar = content.charAt(0);
 
         switch (firstChar) {
@@ -99,11 +102,13 @@ public class OrmImpl implements Orm {
         if (content instanceof ConnectionReadWriteSource) {
             new DatabaseWrite().write((ConnectionReadWriteSource) content, object);
         } else if (content instanceof FileReadWriteSource) {
-            getWritingStrategy((FileReadWriteSource) object)
+            getWritingStrategy((FileReadWriteSource) content)
                     .write((FileReadWriteSource) content, object);
-        } else {
+        }
+        else {
             throw new UnsupportedOperationException("Unknown data input source");
         }
+
 
     }
 
@@ -111,13 +116,13 @@ public class OrmImpl implements Orm {
         String content = FilenameUtils.getExtension(object.getSource().getName());
         switch (content) {
             case "json":
-                new JsonWrite();
+                return new JsonWrite();
             case "xml":
-                new XmlWrite();
+                return new XmlWrite();
             case "csv":
-                new CsvWrite();
+                return new CsvWrite();
             default:
-                throw new UnsupportedOperationException();
+                throw new UnsupportedOperationException("Unknown type - " + content);
         }
     }
 }

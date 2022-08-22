@@ -4,39 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9b394dfc-bdc3-4fc3-b093-abde27bf52de" name="Changes" comment="some fix">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/CsvRead.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/DatabaseRead.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/JsonRead.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/XmlRead.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/CsvWrite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/DatabaseWrite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/JsonWrite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/XmlWrite.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/ConnectionToDB.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/utils/ModelSqlHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+    <list default="true" id="9b394dfc-bdc3-4fc3-b093-abde27bf52de" name="Changes" comment="Done (only left fix date of birth)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/model/Table.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/model/Table.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/Orm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/Orm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/service/impl/OrmImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/service/impl/OrmImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/ConnectionReadWriteSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/ConnectionReadWriteSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/DataReadWriteSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/DataReadWriteSource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/FileReadWriteSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/FileReadWriteSource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/CSVParsingStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/DatabaseParsingStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/JSONParsingStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/ParsingStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/ParsingStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/XMLParsingStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/CsvWriteStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/DatabaseWriteStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/JsonWriteStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/WriteStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/WriteStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/XmlWriteStrategy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/utils/ConnectionToDatabase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/CsvRead.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/CsvRead.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/JsonRead.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/read/JsonRead.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/CsvWrite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/strategy/write/CsvWrite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/reader.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/reader.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/reader.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/reader.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,7 +150,7 @@
       <workItem from="1661078397328" duration="16764000" />
       <workItem from="1661167487586" duration="9253000" />
       <workItem from="1661177262793" duration="7359000" />
-      <workItem from="1661185321209" duration="4778000" />
+      <workItem from="1661185321209" duration="13256000" />
     </task>
     <task id="LOCAL-00001" summary="Some Xml and Json">
       <created>1660924723266</created>
@@ -208,7 +187,14 @@
       <option name="project" value="LOCAL" />
       <updated>1661101670519</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Done (only left fix date of birth)">
+      <created>1661190350911</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1661190350911</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -231,15 +217,16 @@
     <MESSAGE value="Csv writer + some datebase fix(only left localdate, bacause date = null);" />
     <MESSAGE value="Сделано запись в Бд, но пока не реализовано так как нужно." />
     <MESSAGE value="some fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="some fix" />
+    <MESSAGE value="Done (only left fix date of birth)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done (only left fix date of birth)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/org/example/App.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="13" />
+          <line>60</line>
+          <option name="timeStamp" value="21" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -249,5 +236,10 @@
         <PinnedItemInfo parentTag="org.example.model.Person" memberName="position" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <inline-watch fileUrl="file://$PROJECT_DIR$/src/main/java/org/example/strategy/read/CsvRead.java" line="18">
+        <watch expression="lines" language="JAVA" />
+      </inline-watch>
+    </watches-manager>
   </component>
 </project>
